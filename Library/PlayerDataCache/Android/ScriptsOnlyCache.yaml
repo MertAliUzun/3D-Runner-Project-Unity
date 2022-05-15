@@ -803,6 +803,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: TMP_TextEventCheck
+  - hash:
+      serializedVersion: 2
+      Hash: 57a47b4b746d41a60a9e7a22c9c74d2b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AspectRatio
   platform: 13
   scenePathNames:
   - Assets/Scenes/Level01.unity

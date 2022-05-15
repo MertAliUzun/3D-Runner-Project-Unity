@@ -56,16 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TF Tools\ToolBox\Editor\TB_Resources.cs" />
-    <Compile Include="Assets\TF Tools\ToolBox\TB_TextureTools\Editor\TB_Resources_TextureTools.cs" />
-    <Compile Include="Assets\TF Tools\ToolBox\Editor\WidgetWindow.cs" />
-    <Compile Include="Assets\TF Tools\ToolBox\TB_TextureTools\TextureCombiner\Editor\TB_TextureCombiner_Window.cs" />
-    <Compile Include="Assets\TF Tools\ToolBox\Editor\UtilityWindow.cs" />
-    <Compile Include="Assets\TF Tools\_Extensions\Exceptions\Editor\InvisibleEditorComponent_Inspector.cs" />
-    <Compile Include="Assets\TF Tools\ToolBox\Editor\Widget.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\TF Tools\_Extensions\Editor\TFToolsEditor.Extensions.dll" />
+    <Compile Include="Assets\ColorPatternHighlight\Editor\ColorPatternHighlight_editor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -313,12 +304,6 @@
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.12\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-    </Reference>
-    <Reference Include="TFTools.Extensions">
-      <HintPath>Assets\TF Tools\_Extensions\TFTools.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="TFToolsEditor.Extensions">
-      <HintPath>Assets\TF Tools\_Extensions\Editor\TFToolsEditor.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

@@ -18,13 +18,23 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+
     public void ChangeScore(int scoreValue)
     {
-        if(score >= 100)
-        {
-            score = 90;
-        }
         score += scoreValue;
+        if (score >= 100)
+        {
+            score = 100;
+        }
+        if(score <= 0)
+        {
+            score = 0;
+        }
+        if(score <= -10)
+        {
+            score = 0;
+        }
+        
         text.text = score.ToString();
     }
 }

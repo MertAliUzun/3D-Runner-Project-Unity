@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     private CharacterController controller;
     private Animator anim;
     private Vector3 direction;
+    private Vector3 movementVector;
     public float movementSpeed = 1f;
     public float jumpPower = .001f;
     public float gravity = -1f;
@@ -24,17 +25,18 @@ public class Movement : MonoBehaviour
     void Update()
     {
         HandleAnimations();
-        Debug.Log(ReplayButtonScript.victory);
+        //Debug.Log(ReplayButtonScript.victory);
+        Debug.Log("movevec: " + movementVector.x);
+        Debug.Log("direction: " + direction.x);
+        Debug.Log("pos: " + transform.position.x);
     }
     void FixedUpdate()
     {
         HandleGravity();  //Sets Gravity
-
-      //  direction.x -= transform.position.x;
-  
+        moveVec();
         if (Input.GetMouseButton(0) && !ReplayButtonScript.gameOverScreenActive) // If button is pressed can control character
         {
-            controller.Move(direction * Time.fixedDeltaTime / 3);
+            controller.Move(movementVector * Time.fixedDeltaTime / 3);
             anim.SetBool("isRunning", true);
             Flip();
             Move();
@@ -50,6 +52,49 @@ public class Movement : MonoBehaviour
         }
 
     }
+    void moveVec()
+    {
+        if (transform.position.x > 0f && direction.x > 0f)
+        {
+            if (direction.x < transform.position.x)
+            {
+                direction.x = direction.x - transform.position.x;
+
+            }
+            if (direction.x == transform.position.x)
+            {
+                direction.x = 0f;
+            }
+        }
+        if (transform.position.x < 0f && direction.x < 0f)
+        {
+            if (direction.x > transform.position.x)
+            {
+                direction.x = direction.x - transform.position.x;
+
+            }
+            if (direction.x == transform.position.x)
+            {
+                direction.x = 0f;
+            }
+        }
+        else if ((transform.position.x < 0f && direction.x > 0f) || (transform.position.x > 0f && direction.x < 0f))
+        {
+            if (direction.x > 0f)
+            {
+                direction.x = Mathf.Abs(direction.x) + Mathf.Abs(transform.position.x);
+            }
+            if (direction.x < 0f)
+            {
+                direction.x = -1f * (Mathf.Abs(direction.x) + Mathf.Abs(transform.position.x));
+            }
+
+        }
+
+
+        movementVector = direction;
+        movementVector.x *= 4f;
+    } //Makes the movement in complience with character instead of camera
     void HandleAnimations()
     {
         if (ReplayButtonScript.isGameOver)
@@ -69,24 +114,34 @@ public class Movement : MonoBehaviour
             Vector3 hitvec = hit.point;                                        //Gets Mouse Position
             hitvec.y = transform.position.y;
             hitvec.z = transform.position.z;   
-            direction = Vector3.Lerp(transform.position, hitvec * 4f, 2f);  //Handles Left and Right Movement
+            direction = Vector3.Lerp(transform.position, hitvec , 2f);  //Handles Left and Right Movement
             anim.SetBool("isRunning", true);
         }
     }
     void Flip()   // Face Running Direction
     {
-        if (transform.position.x < direction.x - 2f)
+        if(!(transform.position.x > 0 && direction.x > 0))
         {
-            transform.rotation = Quaternion.Euler(0, 60, 0);
+            if (transform.position.x < direction.x - .5f)
+            {
+                transform.rotation = Quaternion.Euler(0, direction.x * 40f, 0);
+            }
+            else if (transform.position.x > direction.x + .5f)
+            {
+                transform.rotation = Quaternion.Euler(0, direction.x * 40f, 0);
+            }
+            else if (transform.position.x > direction.x - .2f || transform.position.x < direction.x + .2f)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-        else if (transform.position.x > direction.x + 2f)
-        {
-            transform.rotation = Quaternion.Euler(0, -60, 0);
-        }
-        else if(transform.position.x > direction.x - 2f || transform.position.x < direction.x + 2f)
+        if(transform.position.x > 0.4f || transform.position.x < -0.8f)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+        
+
+       
     }
     void HandleGravity()
     {
